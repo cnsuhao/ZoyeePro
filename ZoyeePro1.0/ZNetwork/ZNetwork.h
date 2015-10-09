@@ -10,6 +10,9 @@
 #define ZNETWORK_API __declspec(dllimport)
 #endif
 
+#ifndef __ZOYEE_ZNETWORK_H__
+#define __ZOYEE_ZNETWORK_H__
+
 namespace ZoyeePro10
 {
 #define ZNetwork ZNETWORK_API
@@ -44,6 +47,9 @@ namespace ZoyeePro10
 	};
 
 	class CContext;
+	class INetworkModel;
+	class CNetwork;
+
 	class INetworkCallback
 	{
 	public:
@@ -60,49 +66,45 @@ namespace ZoyeePro10
 		emContextAction emAction;
 	}; 
 
-	class INetworkCtrl
+	class INetworkModel
 	{
+		friend class CNetwork;
 	public:
-		INetworkCtrl();
-		~INetworkCtrl();
+		void SetCallback(INetworkCallback* pCallback);
+		virtual ~INetworkModel();
+		virtual CContext* Init(const char* pDesc, int nProtocol = TCP) = 0;
+		virtual int UnInit() = 0;
 
-		virtual int Run();
-		virtual int Pause();
-		virtual int Resume();
-		virtual int Stop();
-	};
-
-	class INetworkBase
-	{
-	public:
-		static INetworkBase* Create(INetworkCallback* pCallback);
-		virtual void Print() = 0;
-		//static void Release(INetworkBase* pNetworkBase);
-		//virtual CContext* Init(const char* pDesc, int nNetworkType, int nProtocol = TCP);
-		//virtual int UnInit();
-
-		//virtual int Send(const char* pszbuff, const int nLen, const CContext* pContext);
-		//virtual CContext* Connect(CContext* pDesc);
-		//virtual int DisConnect();
-		//virtual int DisConnect(const CContext* pContext);// kick
+		virtual int Send(const char* pszbuff, const int nLen, const CContext* pContext) = 0;
+		virtual CContext* Connect(CContext* pDesc) = 0;
+		virtual int DisConnect() = 0;
+		virtual int DisConnect(const CContext* pContext) = 0;// kick
 	private:
-		INetworkCtrl* pNetworkCtrl;
 		INetworkCallback* m_pCallback;
+		HANDLE* m_phThread;
+		int m_nThreadSize;
 	};
 
 	class ZNetwork CNetwork
 	{
+		friend class INetworkModel;
 	public:
 		static CNetwork* Instance();
 		static void ReleaseInstance();
 
-		CNetwork* Create();
-		void Release(CNetwork* pNetwork);
+		static INetworkModel* CreateNetworkBase(int nNetworkType,  INetworkCallback* pCallback);
+		static void ReleaseINetworkModel(INetworkModel* pNetworkModel);
 
-		INetworkBase* CreateNetworkBase(INetworkCallback* pCallback);
+		static int Pause(INetworkModel* pModel);
+		static int Resume(INetworkModel* pModel);
+
 	private:
 		CNetwork();
 		~CNetwork();
 		static CNetwork* pInstance;
 	};
+
+	void printNoSurport(const char* pFuncName);
 }
+
+#endif

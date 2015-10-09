@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "!ZoyeePro1.0", "ZoyeePro1.0\ZoyeePro1.0.vcxproj", "{F1A93EFC-9E76-4A98-94B7-A66CEA19F759}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "!TestApp", "TestApp\TestApp.vcxproj", "{9F431268-E10F-4309-8C2C-29027D63310F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{65700750-21D8-4F78-BA78-17350E8CBAF7} = {65700750-21D8-4F78-BA78-17350E8CBAF7}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZNetwork", "ZNetwork\ZNetwork.vcxproj", "{65700750-21D8-4F78-BA78-17350E8CBAF7}"
 EndProject

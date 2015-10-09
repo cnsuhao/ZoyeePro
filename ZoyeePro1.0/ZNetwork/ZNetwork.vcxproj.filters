@@ -30,6 +30,9 @@
     <ClInclude Include="stdafx.h">
       <Filter>default</Filter>
     </ClInclude>
+    <ClInclude Include="IocpServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZNetwork.cpp">
@@ -40,6 +43,9 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>default</Filter>
+    </ClCompile>
+    <ClCompile Include="IocpServer.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
