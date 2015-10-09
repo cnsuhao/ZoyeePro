@@ -10,13 +10,95 @@
 #define ZNETWORK_API __declspec(dllimport)
 #endif
 
-// 此类是从 ZNetwork.dll 导出的
-class ZNETWORK_API CZNetwork {
-public:
-	CZNetwork(void);
-	// TODO: 在此添加您的方法。
-};
+namespace ZoyeePro10
+{
+#define ZNetwork ZNETWORK_API
+#define TCP 0
 
-extern ZNETWORK_API int nZNetwork;
+#define NET_SHAREMEM_SRV	0x1000
+#define NET_PIPE_SRV			0x1001
+#define NET_IOCP_SRV			0x1002
+#define NET_ONEWAY_SRV		0x1003
 
-ZNETWORK_API int fnZNetwork(void);
+#define NET_SHAREMEM_CLI	0x2000
+#define NET_PIPE_CLI			0x2001
+#define NET_SOCKCLIENT		0x2002
+
+	enum emContextAction
+	{
+		ON_ACCEPT,
+		ON_CONNECT,
+		ON_KICK,
+		ON_DISCONNECT,
+		ON_SEND,
+		ON_RECV,
+		ON_INIT,
+		ON_UNINIT,
+		ON_RUN,
+		ON_STOP,
+		ON_PAUSE,
+		ON_RESUEM,
+		//---------------------------------
+		ON_SYSTEM = 0x0100,
+		ON_ERROR,
+	};
+
+	class CContext;
+	class INetworkCallback
+	{
+	public:
+		virtual int OnMSG(const CContext* pContext) = 0;
+	};
+	
+	class ZNetwork CContext
+	{
+	public:		
+		char* pszBuff;
+		int nLen;
+		char* pszDesc;
+		void* pHandle;
+		emContextAction emAction;
+	}; 
+
+	class ZNetwork INetworkCtrl
+	{
+	public:
+		INetworkCtrl();
+		~INetworkCtrl();
+
+		virtual int Run();
+		virtual int Pause();
+		virtual int Resume();
+		virtual int Stop();
+	};
+
+	class ZNetwork INetworkBase
+	{
+	public:
+		INetworkBase(INetworkCallback* pCallback);
+		~INetworkBase();
+		virtual int Init(const char* pDesc, int nNetworkType, int nProtocol = TCP);
+		virtual int UnInit();
+
+		virtual int Send(const char* pszbuff, const int nLen, const CContext* pContext);
+		virtual CContext* Connect(const char* pDesc);
+		virtual int DisConnect();
+	private:
+		INetworkCallback* m_pCallback;
+	};
+
+	class ZNetwork CNetwork
+	{
+	public:
+		static CNetwork* Instance();
+		static void ReleaseInstance();
+
+		CNetwork* Create();
+		void Release(CNetwork* pNetwork);
+		INetworkBase* pNetworkBase;
+		INetworkCtrl*    pNetworkCtrl;
+	private:
+		CNetwork();
+		~CNetwork();
+	};
+}
