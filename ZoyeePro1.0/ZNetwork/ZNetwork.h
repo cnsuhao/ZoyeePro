@@ -60,7 +60,7 @@ namespace ZoyeePro10
 		emContextAction emAction;
 	}; 
 
-	class ZNetwork INetworkCtrl
+	class INetworkCtrl
 	{
 	public:
 		INetworkCtrl();
@@ -72,18 +72,21 @@ namespace ZoyeePro10
 		virtual int Stop();
 	};
 
-	class ZNetwork INetworkBase
+	class INetworkBase
 	{
 	public:
-		INetworkBase(INetworkCallback* pCallback);
-		~INetworkBase();
-		virtual int Init(const char* pDesc, int nNetworkType, int nProtocol = TCP);
-		virtual int UnInit();
+		static INetworkBase* Create(INetworkCallback* pCallback);
+		virtual void Print() = 0;
+		//static void Release(INetworkBase* pNetworkBase);
+		//virtual CContext* Init(const char* pDesc, int nNetworkType, int nProtocol = TCP);
+		//virtual int UnInit();
 
-		virtual int Send(const char* pszbuff, const int nLen, const CContext* pContext);
-		virtual CContext* Connect(const char* pDesc);
-		virtual int DisConnect();
+		//virtual int Send(const char* pszbuff, const int nLen, const CContext* pContext);
+		//virtual CContext* Connect(CContext* pDesc);
+		//virtual int DisConnect();
+		//virtual int DisConnect(const CContext* pContext);// kick
 	private:
+		INetworkCtrl* pNetworkCtrl;
 		INetworkCallback* m_pCallback;
 	};
 
@@ -95,10 +98,11 @@ namespace ZoyeePro10
 
 		CNetwork* Create();
 		void Release(CNetwork* pNetwork);
-		INetworkBase* pNetworkBase;
-		INetworkCtrl*    pNetworkCtrl;
+
+		INetworkBase* CreateNetworkBase(INetworkCallback* pCallback);
 	private:
 		CNetwork();
 		~CNetwork();
+		static CNetwork* pInstance;
 	};
 }
