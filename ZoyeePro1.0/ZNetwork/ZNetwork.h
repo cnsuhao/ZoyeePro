@@ -79,7 +79,7 @@ namespace ZoyeePro10
 		virtual CContext* Connect(CContext* pDesc) = 0;
 		virtual int DisConnect() = 0;
 		virtual int DisConnect(const CContext* pContext) = 0;// kick
-	private:
+	protected:
 		INetworkCallback* m_pCallback;
 		HANDLE* m_phThread;
 		int m_nThreadSize;
