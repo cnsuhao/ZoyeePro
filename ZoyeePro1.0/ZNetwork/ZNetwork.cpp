@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "ZNetwork.h"
 #include "IocpServer.h"
+#include "SocketServer.h"
+
 using namespace ZoyeePro10;
 
 CNetwork* ZoyeePro10::CNetwork::Instance()
@@ -50,6 +52,8 @@ INetworkModel* ZoyeePro10::CNetwork::CreateNetworkBase( int nNetworkType, INetwo
 		ptr->SetCallback(pCallback);
 		break;
 	case NET_ONEWAY_SRV:
+		ptr = new CSocketServer;
+		ptr->SetCallback(pCallback);
 	case NET_SHAREMEM_CLI:
 	case NET_PIPE_CLI:
 	case NET_SOCKCLIENT:

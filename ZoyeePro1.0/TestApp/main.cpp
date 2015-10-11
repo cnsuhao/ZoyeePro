@@ -9,35 +9,6 @@ using namespace ZoyeePro10;
 #pragma comment(lib, "../output/release/znetwork.lib")
 #endif
 
-class IClass
-{
-public:
-	IClass();
-	~IClass();
-	virtual int test() = 0;
-private:
-
-};
-
-IClass::IClass()
-{
-}
-
-IClass::~IClass()
-{
-}
-
-int IClass::test()
-{
-	return 10;
-}
-
-class SS : public IClass
-{
-public:
-	//int test(){return 20;};
-};
-
 int main()
 {
 
