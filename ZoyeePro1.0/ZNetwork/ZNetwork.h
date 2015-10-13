@@ -13,6 +13,7 @@
 #ifndef __ZOYEE_ZNETWORK_H__
 #define __ZOYEE_ZNETWORK_H__
 
+
 namespace ZoyeePro10
 {
 #define ZNetwork ZNETWORK_API
@@ -26,6 +27,8 @@ namespace ZoyeePro10
 #define NET_SHAREMEM_CLI	0x2000
 #define NET_PIPE_CLI			0x2001
 #define NET_SOCKCLIENT		0x2002
+
+
 
 	enum emContextAction
 	{
@@ -63,6 +66,8 @@ namespace ZoyeePro10
 		int nLen;
 		char* pszDesc;
 		void* pHandle;
+		unsigned int _c;
+		unsigned int _s;
 		emContextAction emAction;
 	}; 
 
@@ -75,13 +80,13 @@ namespace ZoyeePro10
 		virtual CContext* Init(const char* pDesc, int nProtocol = TCP) = 0;
 		virtual int UnInit() = 0;
 
-		virtual int Send(const char* pszbuff, const int nLen, const CContext* pContext) = 0;
+		virtual int Send(const char* pszbuff, const int nLen, CContext* pContext) = 0;
 		virtual CContext* Connect(CContext* pDesc) = 0;
 		virtual int DisConnect() = 0;
-		virtual int DisConnect(const CContext* pContext) = 0;// kick
+		virtual int DisConnect(CContext* pContext) = 0;// kick
 	protected:
 		INetworkCallback* m_pCallback;
-		HANDLE* m_phThread;
+		void** m_phThread;
 		int m_nThreadSize;
 	};
 
