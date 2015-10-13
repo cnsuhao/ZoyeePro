@@ -13,7 +13,7 @@ int CIocpServer::UnInit()
 	return 0;
 }
 
-int CIocpServer::Send( const char* pszbuff, const int nLen, const CContext* pContext )
+int CIocpServer::Send( const char* pszbuff, const int nLen, CContext* pContext )
 {
 	return 0;
 }
@@ -30,7 +30,7 @@ int CIocpServer::DisConnect()
 	return 0;
 }
 
-int CIocpServer::DisConnect( const CContext* pContext )
+int CIocpServer::DisConnect( CContext* pContext )
 {
 	CContext context;
 	
