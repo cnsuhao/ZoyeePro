@@ -88,4 +88,16 @@ char* CSocketBase::GetAddr( sockaddr_in& sock_in )
 	return inet_ntoa(sock_in.sin_addr);
 }
 
+char* CSocketBase::GetFullAddr( sockaddr_in& sock_in )
+{
+	static char szFullIP[64] = {0};
+	sprintf(szFullIP, "%s:%d", inet_ntoa(sock_in.sin_addr), htons(sock_in.sin_port));
+	return szFullIP;
+}
+
+int CSocketBase::GetPort( sockaddr_in& sock_in )
+{
+	return htons(sock_in.sin_port);
+}
+
 CSocketBase* CSocketBase::ptrSocketbase = nullptr;

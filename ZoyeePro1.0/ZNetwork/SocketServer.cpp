@@ -75,27 +75,39 @@ int CSocketServer::DisConnect( CContext* pContext )
 DWORD WINAPI CSocketServer::workThread( void *pParam )
 {
 	CSocketServer* pThis = (CSocketServer*)pParam;
-	sockaddr remoteSockaddr;
+	SOCKADDR_IN remoteSockaddr;
+
 	int nSize = sizeof(remoteSockaddr);
 	int nLen = 0;
 	char szBuff[1024] = {0};
 	while (true)
 	{
-		pThis->sockCli = accept(pThis->sockSrv, &remoteSockaddr,  &nSize);
+		pThis->sockCli = accept(pThis->sockSrv, (sockaddr*)&remoteSockaddr,  &nSize);
 		if (pThis->sockCli == INVALID_SOCKET)
 		{
 			DWORD dw = GetLastError();
+			pThis->m_pContext->pszBuff = "Accept处出了问题";
+			pThis->m_pContext->CalcBuffStrLen();
+			pThis->m_pCallback->OnMSG(pThis->m_pContext);
 			Sleep(10);
 			continue;
-		}
+		}		
 
+		pThis->m_pContext->pszDesc = CSocketBase::GetFullAddr(remoteSockaddr);
 		pThis->m_pContext->_c = pThis->sockCli;
 		pThis->m_pContext->_s = pThis->sockSrv;
+		sprintf(szBuff, "Accept进来一个连接[%d], addr[%s]", pThis->sockCli, pThis->m_pContext->pszDesc);
+		pThis->m_pContext->pszBuff = szBuff;
+		pThis->m_pCallback->OnMSG(pThis->m_pContext);
+
 		while (true)
 		{
 			nLen = recv(pThis->sockCli, szBuff, 1024, 0);
 			if (nLen <= 0)
 			{
+				pThis->m_pContext->pszBuff = "Recv异常, 关闭这个Socket";
+				pThis->m_pContext->CalcBuffStrLen();
+				pThis->m_pCallback->OnMSG(pThis->m_pContext);
 				closesocket(pThis->sockCli);
 				pThis->sockCli = INVALID_SOCKET;
 				break;

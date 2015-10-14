@@ -18,7 +18,7 @@ class CNetworkCallback : public INetworkCallback
 
 int CNetworkCallback::OnMSG( const CContext* pContext )
 {
-	printf("[recv] :[%s]\n", pContext->pszBuff);
+	printf("[recv] : \"%s\"\n", pContext->pszBuff);
 	return 0;
 }
 
