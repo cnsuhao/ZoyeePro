@@ -108,7 +108,7 @@ DWORD WINAPI CSocketServer::workThread( void *pParam )
 				pThis->m_pContext->pszBuff = "Recv异常, 关闭这个Socket";
 				pThis->m_pContext->CalcBuffStrLen();
 				pThis->m_pCallback->OnMSG(pThis->m_pContext);
-				closesocket(pThis->sockCli);
+				CSocketBase::Close(pThis->sockCli);
 				pThis->sockCli = INVALID_SOCKET;
 				break;
 			}

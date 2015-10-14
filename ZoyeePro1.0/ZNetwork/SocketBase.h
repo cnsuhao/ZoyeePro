@@ -15,7 +15,7 @@ public:
 	static char* GetAddr(sockaddr_in& sock_in);
 	static char* GetFullAddr(sockaddr_in& sock_in);
 	static int GetPort(sockaddr_in& sock_in);
-
+	static void Close(SOCKET s);
 private:
 	void SetError(const char* pError);
 	CSocketBase(void);
