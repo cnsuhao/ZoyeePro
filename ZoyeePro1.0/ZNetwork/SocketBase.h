@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #ifndef TCP
-#define TCP 10
+#define TCP 0
 #endif
 
 using namespace std;
