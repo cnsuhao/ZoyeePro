@@ -6,6 +6,7 @@ class CSocketBase;
 class CSocketServer :	public INetworkModel
 {
 public:
+	CSocketServer();
 	virtual CContext* Init(const char* pDesc, int nProtocol = TCP);
 	virtual int UnInit();
 
@@ -18,6 +19,7 @@ private:
 	static DWORD WINAPI workThread(void *pParam);
 	SOCKET sockCli;
 	SOCKET sockSrv;
-	CSocketBase* initSocket;
+	bool bIsInit;
+	CContext* m_pContext;
 };
 

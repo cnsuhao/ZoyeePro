@@ -7,6 +7,7 @@
 #include "SocketServer.h"
 
 using namespace ZoyeePro10;
+#define FreeChars(str) if(str){delete str; str = nullptr;}
 
 CNetwork* ZoyeePro10::CNetwork::Instance()
 {
@@ -80,4 +81,15 @@ ZoyeePro10::INetworkModel::~INetworkModel()
 void ZoyeePro10::INetworkModel::SetCallback( INetworkCallback* pCallback )
 {
 	m_pCallback = pCallback;
+}
+
+void ZoyeePro10::CContext::Release()
+{
+	FreeChars(pszBuff);
+	FreeChars(pszDesc);
+}
+
+void ZoyeePro10::CContext::CalcBuffStrLen()
+{
+	nLen = strlen(pszBuff);
 }

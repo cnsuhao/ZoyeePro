@@ -69,6 +69,8 @@ namespace ZoyeePro10
 		unsigned int _c;
 		unsigned int _s;
 		emContextAction emAction;
+		void Release();
+		void CalcBuffStrLen();
 	}; 
 
 	class INetworkModel
