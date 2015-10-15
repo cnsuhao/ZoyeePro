@@ -85,6 +85,7 @@
   <ItemGroup>
     <ClInclude Include="IocpServer.h" />
     <ClInclude Include="LockerHelper.h" />
+    <ClInclude Include="SelectServer.h" />
     <ClInclude Include="SocketBase.h" />
     <ClInclude Include="SocketClient.h" />
     <ClInclude Include="SocketServer.h" />
@@ -103,6 +104,7 @@
     </ClCompile>
     <ClCompile Include="IocpServer.cpp" />
     <ClCompile Include="LockerHelper.cpp" />
+    <ClCompile Include="SelectServer.cpp" />
     <ClCompile Include="SocketBase.cpp" />
     <ClCompile Include="SocketClient.cpp" />
     <ClCompile Include="SocketServer.cpp" />

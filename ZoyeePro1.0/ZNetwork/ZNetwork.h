@@ -20,13 +20,14 @@ namespace ZoyeePro10
 #define TCP 0
 
 #define NET_SHAREMEM_SRV	0x1000
-#define NET_PIPE_SRV			0x1001
-#define NET_IOCP_SRV			0x1002
+#define NET_PIPE_SRV				0x1001
+#define NET_IOCP_SRV				0x1002
 #define NET_ONEWAY_SRV		0x1003
+#define NET_SELECT					0x1004
 
 #define NET_SHAREMEM_CLI	0x2000
-#define NET_PIPE_CLI			0x2001
-#define NET_SOCKCLIENT		0x2002
+#define NET_PIPE_CLI					0x2001
+#define NET_SOCKCLIENT			0x2002
 
 #define GetSetFunc(type, name, value) public: type Get##name(){return value;}\
 	void Set##name(type _value){value = _value;}\
