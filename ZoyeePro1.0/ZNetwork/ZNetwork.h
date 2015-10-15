@@ -28,7 +28,9 @@ namespace ZoyeePro10
 #define NET_PIPE_CLI			0x2001
 #define NET_SOCKCLIENT		0x2002
 
-
+#define GetSetFunc(type, name, value) public: type Get##name(){return value;}\
+	void Set##name(type _value){value = _value;}\
+private: type value;
 
 	enum emContextAction
 	{
@@ -69,6 +71,7 @@ namespace ZoyeePro10
 		unsigned int _c;
 		unsigned int _s;
 		emContextAction emAction;
+		CContext();
 		void Release();
 		void CalcBuffStrLen();
 	}; 
@@ -83,9 +86,9 @@ namespace ZoyeePro10
 		virtual int UnInit() = 0;
 
 		virtual int Send(const char* pszbuff, const int nLen, CContext* pContext) = 0;
-		virtual CContext* Connect(CContext* pDesc) = 0;
-		virtual int DisConnect() = 0;
-		virtual int DisConnect(CContext* pContext) = 0;// kick
+		virtual CContext* Connect(CContext* pDesc) = 0;// almost time is for client, nor server
+		virtual int DisConnect() = 0;//almost time is for client 
+		virtual int DisConnect(CContext* pContext) = 0;// almost time is kick by server
 	protected:
 		INetworkCallback* m_pCallback;
 		void** m_phThread;

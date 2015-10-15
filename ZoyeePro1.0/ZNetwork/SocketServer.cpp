@@ -2,6 +2,8 @@
 #include "SocketServer.h"
 #include "SocketBase.h"
 
+#define MAXBUFFSIZE 1024
+
 CContext* CSocketServer::Init( const char* pDesc, int nProtocol /*= TCP*/ )
 {
 	if (bIsInit)
@@ -33,26 +35,35 @@ CContext* CSocketServer::Init( const char* pDesc, int nProtocol /*= TCP*/ )
 
 int CSocketServer::UnInit()
 {
+	if (bIsInit)
+	{
+		return 0;
+	}
+
 	if (sockCli != INVALID_SOCKET)
 	{
-		closesocket(sockCli);
+		CSocketBase::Close(sockCli);		
 	}
 	if (sockSrv != INVALID_SOCKET)
 	{
-		closesocket(sockSrv);
+		CSocketBase::Close(sockSrv);
 	}
 	
 	if (m_phThread[0] != 0)
 	{
+		TerminateThread(m_phThread[0], 0);
 	}
-	//TerminateThread()
-
+	bIsInit = false;
 	return 0;
 }
 
 int CSocketServer::Send( const char* pszbuff, const int nLen, CContext* pContext )
 {
-	return send(pContext->_c, pszbuff, nLen, 0);	
+	if (pContext->_c != INVALID_SOCKET)
+	{
+		return send(pContext->_c, pszbuff, nLen, 0);
+	}
+	return -1;
 }
 
 CContext* CSocketServer::Connect( CContext* pDesc )
@@ -63,12 +74,20 @@ CContext* CSocketServer::Connect( CContext* pDesc )
 
 int CSocketServer::DisConnect()
 {
+	printNoSurport("CSocketServer::DisConnect");
 	return 0;
 }
 
 int CSocketServer::DisConnect( CContext* pContext )
 {
-	printNoSurport("CSocketServer::DisConnect");
+	CSocketBase::Close(pContext->_c);
+	static char szBuff[128] = {0};
+	sprintf(&szBuff[0], "已断开[%d][%s]", pContext->_c, pContext->pszDesc);
+	pContext->pszBuff = szBuff;
+	pContext->CalcBuffStrLen();
+	m_pCallback->OnMSG(pContext);
+	pContext->pszBuff = NULL;//防止静态变量释放可能出错
+	pContext->Release();
 	return 0;
 }
 
@@ -79,7 +98,7 @@ DWORD WINAPI CSocketServer::workThread( void *pParam )
 
 	int nSize = sizeof(remoteSockaddr);
 	int nLen = 0;
-	char szBuff[1024] = {0};
+	char szBuff[MAXBUFFSIZE] = {0};
 	while (true)
 	{
 		pThis->sockCli = accept(pThis->sockSrv, (sockaddr*)&remoteSockaddr,  &nSize);
@@ -102,14 +121,13 @@ DWORD WINAPI CSocketServer::workThread( void *pParam )
 
 		while (true)
 		{
-			nLen = recv(pThis->sockCli, szBuff, 1024, 0);
+			nLen = recv(pThis->sockCli, szBuff, MAXBUFFSIZE - 1, 0);
 			if (nLen <= 0)
 			{
 				pThis->m_pContext->pszBuff = "Recv异常, 关闭这个Socket";
 				pThis->m_pContext->CalcBuffStrLen();
 				pThis->m_pCallback->OnMSG(pThis->m_pContext);
 				CSocketBase::Close(pThis->sockCli);
-				pThis->sockCli = INVALID_SOCKET;
 				break;
 			}
 			szBuff[nLen] = 0;

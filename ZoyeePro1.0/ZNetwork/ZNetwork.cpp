@@ -5,9 +5,10 @@
 #include "ZNetwork.h"
 #include "IocpServer.h"
 #include "SocketServer.h"
+#include "SocketClient.h"
 
 using namespace ZoyeePro10;
-#define FreeChars(str) if(str){delete str; str = nullptr;}
+#define FreeChars(str) if(str != NULL){delete str; str = nullptr;}
 
 CNetwork* ZoyeePro10::CNetwork::Instance()
 {
@@ -47,7 +48,9 @@ INetworkModel* ZoyeePro10::CNetwork::CreateNetworkBase( int nNetworkType, INetwo
 	switch (nNetworkType)
 	{
 	case NET_SHAREMEM_SRV:
+		break;
 	case NET_PIPE_SRV:
+		break;
 	case NET_IOCP_SRV:
 		ptr = new CIocpServer;
 		ptr->SetCallback(pCallback);
@@ -56,8 +59,12 @@ INetworkModel* ZoyeePro10::CNetwork::CreateNetworkBase( int nNetworkType, INetwo
 		ptr = new CSocketServer;
 		ptr->SetCallback(pCallback);
 	case NET_SHAREMEM_CLI:
+		break;
 	case NET_PIPE_CLI:
+		break;
 	case NET_SOCKCLIENT:
+		ptr = new CSocketClient;
+		ptr->SetCallback(pCallback);
 		break;
 	default:
 		break;
@@ -87,9 +94,18 @@ void ZoyeePro10::CContext::Release()
 {
 	FreeChars(pszBuff);
 	FreeChars(pszDesc);
+	delete this;
 }
 
 void ZoyeePro10::CContext::CalcBuffStrLen()
 {
 	nLen = strlen(pszBuff);
+}
+
+ZoyeePro10::CContext::CContext()
+{
+	pszBuff = NULL;
+	pszDesc = NULL;
+	pHandle = NULL;
+	_c = _s = INVALID_SOCKET;
 }
