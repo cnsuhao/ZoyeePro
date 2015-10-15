@@ -117,6 +117,7 @@ DWORD WINAPI CSocketServer::workThread( void *pParam )
 		pThis->m_pContext->_s = pThis->sockSrv;
 		sprintf(szBuff, "Accept进来一个连接[%d], addr[%s]", pThis->sockCli, pThis->m_pContext->pszDesc);
 		pThis->m_pContext->pszBuff = szBuff;
+		pThis->m_pContext->CalcBuffStrLen();
 		pThis->m_pCallback->OnMSG(pThis->m_pContext);
 
 		while (true)

@@ -103,6 +103,10 @@ int CSocketBase::GetPort( sockaddr_in& sock_in )
 
 void CSocketBase::Close(SOCKET& s)
 {
+	if (s == INVALID_SOCKET)
+	{
+		return;
+	}
 	BOOL bReuseaddr=TRUE;
 	setsockopt(s, SOL_SOCKET , SO_REUSEADDR, (const char*)&bReuseaddr, sizeof(BOOL));//可以不经过time_wait
 	BOOL bDontLinger = FALSE;
