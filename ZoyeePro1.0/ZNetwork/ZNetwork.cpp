@@ -6,6 +6,7 @@
 #include "IocpServer.h"
 #include "SocketServer.h"
 #include "SocketClient.h"
+#include "SelectServer.h"
 
 using namespace ZoyeePro10;
 #define FreeChars(str) if(str != NULL){delete str; str = nullptr;}
@@ -58,6 +59,11 @@ INetworkModel* ZoyeePro10::CNetwork::CreateNetworkBase( int nNetworkType, INetwo
 	case NET_ONEWAY_SRV:
 		ptr = new CSocketServer;
 		ptr->SetCallback(pCallback);
+		break;
+	case NET_SELECT:
+		ptr = new CSelectServer;
+		ptr->SetCallback(pCallback);
+		break;
 	case NET_SHAREMEM_CLI:
 		break;
 	case NET_PIPE_CLI:
