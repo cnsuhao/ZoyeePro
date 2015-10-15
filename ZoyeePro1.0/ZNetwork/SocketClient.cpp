@@ -23,16 +23,13 @@ CContext* CSocketClient::Init( const char* pDesc, int nProtocol /*= TCP*/ )
 	if (m_bIsInit)
 	{
 		m_pContext->pszBuff = "已经初始化过, 无法再次初始化";
+		m_pContext->emAction = ON_SYSTEM;
 		m_pContext->CalcBuffStrLen();
 		m_pCallback->OnMSG(m_pContext);
+		m_pContext->pszBuff = NULL;
 		return m_pContext;
 	}
 	strcpy(&szDesc[0], pDesc);
-	//m_sockCli = CSocketBase::Instance()->CreateConnection(pDesc, false, nProtocol);
-	//if (m_sockCli != INVALID_SOCKET)
-	//{
-	//	SetIsConnectd(true);
-	//}
 	m_nProtocol = nProtocol;
 	m_phThread = new HANDLE[1];
 	m_nThreadSize = 1;
@@ -53,34 +50,14 @@ int CSocketClient::Send( const char* pszbuff, const int nLen, CContext* pContext
 
 CContext* CSocketClient::Connect( CContext* pDesc )
 {
-	if (GetIsConnectd())
-	{
-		return m_pContext;
-	}
-	CContext* pContext = new CContext;
-	pContext->pszDesc = new char[pDesc->nLen + 1];
-	strcpy(pContext->pszDesc, pDesc->pszDesc);
-	pContext->_c = CSocketBase::Instance()->CreateConnection(pContext->pszDesc, false, m_nProtocol);
-	if (pContext->_c != INVALID_SOCKET)
-	{
-		pContext->pszBuff = "连接成功";
-		pContext->CalcBuffStrLen();
-		m_pCallback->OnMSG(pContext);
-		m_pContext = pContext;
-		SetIsConnectd(true);
-	}
-	else
-	{
-		pContext->pszBuff = NULL;
-		pContext->Release();
-		pContext = NULL;
-	}
-	
+	printNoSurport("CSocketClient::Connect(1)");
+	return nullptr;
 	return m_pContext;
 }
 
 int CSocketClient::DisConnect()
 {
+	CSocketBase::Close(m_sockCli);
 	return 0;
 }
 
@@ -118,13 +95,14 @@ DWORD WINAPI CSocketClient::workThread( void* lpParam )
 				pThis->m_pContext = new CContext;
 				pThis->m_pContext->emAction = ON_SYSTEM;
 				pThis->m_pContext->_c = pThis->m_sockCli;
-				pThis->m_pContext->pszBuff = "重连成功!";
+				pThis->m_pContext->pszBuff = "连接成功!";
 				pThis->m_pContext->CalcBuffStrLen();
 				pThis->m_pCallback->OnMSG(pThis->m_pContext);
 				pThis->m_pContext->pszBuff = NULL;
 			}
 		}
 		nLen = recv(pThis->m_sockCli, szBuff, MAXBUFFSIZE - 1, 0);
+		pThis->m_pContext->emAction = ON_RECV;
 		pThis->m_pContext->pszBuff = szBuff;
 		pThis->m_pContext->pszBuff[nLen] = 0;
 		pThis->m_pContext->nLen = nLen;
