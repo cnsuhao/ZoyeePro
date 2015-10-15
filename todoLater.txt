@@ -1,0 +1,32 @@
+Model: ZNetwork
+[ X ] 内存通讯
+[ X ] 管道通讯
+[ X ] IOCP
+[ X ] Select
+[ O ] 普通socket
+[ X ] ...
+------------------------------------
+Model: ZUtils
+[ X ] Unicode与宽字节转换
+[ X ] 简单线程池
+[ X ] 复杂线程池
+[ X ] ...
+------------------------------------
+Model: ZSystemCtrl
+[ X ] 注册表
+[ X ] ...
+------------------------------------
+Model: ZFileStream
+[ X ] Json
+[ X ] Xml
+[ X ] Zip and UnZip
+------------------------------------
+Model: ZSQL
+[ X ] Oracle
+[ X ] PostgresSQL
+[ X ] MySQL
+[ X ] SQL-Server
+------------------------------------
+Model: ZNoSQL
+[ X ] Mongo DB
+------------------------------------
