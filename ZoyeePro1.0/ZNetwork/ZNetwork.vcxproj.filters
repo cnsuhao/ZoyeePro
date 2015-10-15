@@ -39,6 +39,12 @@
     <ClInclude Include="SocketServer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="SocketClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LockerHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZNetwork.cpp">
@@ -57,6 +63,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SocketServer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketClient.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LockerHelper.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

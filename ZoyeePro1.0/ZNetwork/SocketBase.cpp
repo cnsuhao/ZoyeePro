@@ -71,6 +71,7 @@ SOCKET CSocketBase::CreateConnection( const char* pDesc, bool bIsSrv /*= true*/,
 			SetError("连上不服务啦!");
 			return INVALID_SOCKET;
 		}
+		return _socket;
 	}
 	SetError("一般不会出现的错误!");
 	return INVALID_SOCKET;
@@ -100,13 +101,14 @@ int CSocketBase::GetPort( sockaddr_in& sock_in )
 	return htons(sock_in.sin_port);
 }
 
-void CSocketBase::Close(SOCKET s)
+void CSocketBase::Close(SOCKET& s)
 {
 	BOOL bReuseaddr=TRUE;
 	setsockopt(s, SOL_SOCKET , SO_REUSEADDR, (const char*)&bReuseaddr, sizeof(BOOL));//可以不经过time_wait
 	BOOL bDontLinger = FALSE;
 	setsockopt(s, SOL_SOCKET, SO_DONTLINGER, (const char*)&bDontLinger, sizeof(BOOL));//强制正在连接的断开
 	closesocket(s);
+	s = INVALID_SOCKET;
 }
 
 CSocketBase* CSocketBase::ptrSocketbase = nullptr;

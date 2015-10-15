@@ -24,7 +24,7 @@ int CNetworkCallback::OnMSG( const CContext* pContext )
 
 int main()
 {
-	INetworkModel *ptr = CNetwork::CreateNetworkBase(NET_ONEWAY_SRV, new CNetworkCallback);
+	INetworkModel *ptr = CNetwork::CreateNetworkBase(NET_SOCKCLIENT, new CNetworkCallback);
 	ptr->Init("127.0.0.1:8888");
 
 	while (true)
