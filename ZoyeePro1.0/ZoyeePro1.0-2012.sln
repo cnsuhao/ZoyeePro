@@ -11,6 +11,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZSystemCtrl", "ZSystemCtrl\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZUtils", "ZUtils\ZUtils.vcxproj", "{6C8C200A-432C-47BB-9F94-FACDC2D5FFA6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "todoLater", "todoLater", "{33B639AC-75EA-4400-B477-BE3914DA4354}"
+	ProjectSection(SolutionItems) = preProject
+		todoLater.txt = todoLater.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32

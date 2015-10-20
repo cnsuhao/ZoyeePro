@@ -5,18 +5,54 @@
 #include "ZSystemCtrl.h"
 
 
-// 这是导出变量的一个示例
-ZSYSTEMCTRL_API int nZSystemCtrl=0;
-
-// 这是导出函数的一个示例。
-ZSYSTEMCTRL_API int fnZSystemCtrl(void)
+ZoyeePro10::CSystemInfo::CSystemInfo()
 {
-	return 42;
+	arrIP = NULL;
+	pHostName = NULL;
+	nIpCount = 0;
 }
 
-// 这是已导出类的构造函数。
-// 有关类定义的信息，请参阅 ZSystemCtrl.h
-CZSystemCtrl::CZSystemCtrl()
+void ZoyeePro10::CSystemInfo::Release()
 {
-	return;
+	delete this;
 }
+
+ZoyeePro10::CModule::CModule()
+{
+	pDirPath = NULL;
+}
+
+void ZoyeePro10::CModule::Release()
+{
+	delete this;
+}
+
+ZoyeePro10::CRegTools* ZoyeePro10::CRegTools::Instance()
+{
+	if (m_ptrInstance == NULL)
+	{
+		m_ptrInstance = new CRegTools;
+	}
+	return m_ptrInstance;
+}
+
+void ZoyeePro10::CRegTools::Release()
+{
+	if (m_ptrInstance)
+	{
+		delete m_ptrInstance;
+		m_ptrInstance = NULL;
+	}
+}
+
+bool ZoyeePro10::CRegTools::QueryValue( const char* pPath, const char* pKey, char* pValueOut )
+{
+	return false;
+}
+
+bool ZoyeePro10::CRegTools::WriteValue( const char* pPath, const char* pKey, char* pValue, int nType )
+{
+	return true;
+}
+
+ZoyeePro10::CRegTools* ZoyeePro10::CRegTools::m_ptrInstance = NULL;

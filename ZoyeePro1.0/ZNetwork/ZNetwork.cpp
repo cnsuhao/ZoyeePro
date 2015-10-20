@@ -115,3 +115,16 @@ ZoyeePro10::CContext::CContext()
 	pHandle = NULL;
 	_c = _s = INVALID_SOCKET;
 }
+
+void ZoyeePro10::CContext::SetStaticBuff( const char* psz, emContextAction _emAction )
+{
+	pszBuff = (char*)psz;
+	CalcBuffStrLen();
+	emAction = _emAction;
+}
+
+void ZoyeePro10::CContext::ReleaseStatic()
+{
+	pszBuff = NULL;
+	nLen = 0;
+}
