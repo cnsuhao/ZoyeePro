@@ -10,13 +10,42 @@
 #define ZUTILS_API __declspec(dllimport)
 #endif
 
-// 此类是从 ZUtils.dll 导出的
-class ZUTILS_API CZUtils {
-public:
-	CZUtils(void);
-	// TODO: 在此添加您的方法。
-};
+#ifndef __ZUTILS_H__
+#define __ZUTILS_H__
 
-extern ZUTILS_API int nZUtils;
+namespace ZoyeePro10
+{
+#define ZUtils ZUTILS_API
 
-ZUTILS_API int fnZUtils(void);
+	class ZUtils CList
+	{
+	public:
+		CList();
+		int Insert(void* pElement);
+		void* First();
+		void* Last();
+		void* Next();
+		void* Next(CList* pNode);
+		void* Back();
+		void* Back(CList* pNode);
+		
+	private:
+		CList* pPreNode;
+		CList* pNextNode;
+	};
+
+	class ITask
+	{
+	public:
+		virtual int Run() = 0;
+	};
+
+	class ZUtils CSimpleThreadPool
+	{
+	public:	 
+
+	};
+
+}
+
+#endif
