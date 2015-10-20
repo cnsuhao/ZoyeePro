@@ -9,14 +9,43 @@
 #else
 #define ZSYSTEMCTRL_API __declspec(dllimport)
 #endif
+#ifndef __ZSYSTEMCTRL_H__
+#define __ZSYSTEMCTRL_H__
+namespace ZoyeePro10
+{
+	#define  ZSYSTEM ZSYSTEMCTRL_API
+	class ZSYSTEM CSystemInfo
+	{
+	public:
+		void Release();
+		CSystemInfo();
+		char** arrIP;
+		int nIpCount;
 
-// 此类是从 ZSystemCtrl.dll 导出的
-class ZSYSTEMCTRL_API CZSystemCtrl {
-public:
-	CZSystemCtrl(void);
-	// TODO: 在此添加您的方法。
-};
+		char* pHostName;		
+	};
 
-extern ZSYSTEMCTRL_API int nZSystemCtrl;
+	class ZSYSTEM CModule
+	{
+	public:
+		CModule();
+		void Release();
+		char* pDirPath;
+	};
 
-ZSYSTEMCTRL_API int fnZSystemCtrl(void);
+	class ZSYSTEM CRegTools
+	{
+	public:
+		static CRegTools* Instance();
+		static void Release();
+		static bool QueryValue(const char* pPath, const char* pKey, char* pValueOut);
+		static bool WriteValue(const char* pPath, const char* pKey, char* pValue, int nType);		
+	private:
+		CRegTools();
+		static CRegTools* m_ptrInstance;
+	};
+
+}
+
+
+#endif

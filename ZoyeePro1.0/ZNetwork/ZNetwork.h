@@ -74,6 +74,8 @@ private: type value;
 		emContextAction emAction;
 		CContext();
 		void Release();
+		void SetStaticBuff(const char* psz, emContextAction _emAction);
+		void ReleaseStatic();
 		void CalcBuffStrLen();
 	}; 
 

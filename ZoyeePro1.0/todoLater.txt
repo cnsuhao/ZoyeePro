@@ -12,8 +12,9 @@ Model: ZUtils
 [ X ] ¸´ÔÓÏß³Ì³Ø
 [ X ] ...
 ------------------------------------
-Model: ZSystemCtrl
+Model: ZSystem
 [ X ] ×¢²á±í
+[ X ] system info( HD, Net, Cpu)
 [ X ] ...
 ------------------------------------
 Model: ZFileStream
