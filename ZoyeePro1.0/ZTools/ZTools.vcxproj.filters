@@ -35,6 +35,7 @@
     <ClInclude Include="KeyCriSetion.h">
       <Filter>Lock</Filter>
     </ClInclude>
+    <ClInclude Include="KeyReadWrite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZTools.cpp">
@@ -51,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="KeyCriSetion.cpp">
       <Filter>Lock</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyReadWrite.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

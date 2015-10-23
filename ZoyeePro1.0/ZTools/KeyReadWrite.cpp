@@ -5,7 +5,7 @@
 #define CLOSEHANDLE(h) if(h != nullptr){CloseHandle(h);h = nullptr;}
 
 
-ZoyeePro10::CKeyReadWrite::CKeyReadWrite( void ):
+ZoyeePro10::CKeyReadWrite::CKeyReadWrite( void ) :
 	hMutex(nullptr),
 	hRead(nullptr),
 	hWrite(nullptr),
@@ -23,6 +23,11 @@ ZoyeePro10::CKeyReadWrite::~CKeyReadWrite( void )
 }
 
 void ZoyeePro10::CKeyReadWrite::Lock( bool bIsReadLock /*= false*/ )
+{
+
+}
+
+void ZoyeePro10::CKeyReadWrite::UnLock( bool bIsReadLock /*= false*/ )
 {
 
 }

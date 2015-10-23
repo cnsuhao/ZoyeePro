@@ -10,7 +10,8 @@ namespace ZoyeePro10
 		virtual ~CKeyReadWrite(void);
 		void Lock(bool bIsReadLock = false);
 		void UnLock(bool bIsReadLock = false);
-	private:
+
+	protected:
 		int AddWriter();
 		int RemoveWriter();
 		bool TryWriteLock();
@@ -18,6 +19,7 @@ namespace ZoyeePro10
 
 		int m_nWriterCount;
 		int m_nReadCount;
+		void* pCriSection;
 		void* hMutex;
 		void* hRead;
 		void* hWrite;
