@@ -10,13 +10,32 @@
 #define ZTOOLS_API __declspec(dllimport)
 #endif
 
+#ifndef __ZTOOL_H__
+#define __ZTOOL_H__
+
 #define ZTools ZTOOLS_API
 
 namespace ZoyeePro10
 {
+	//-----------------------------lock-------------------------------------------
+	enum emKeyType
+	{
+		AutoCriSetion,
+		ManualCriSetion,
+		RWLock,//read - write lock
+	};
+
+	class IKeyCore;
 	class ZTools IKeyManage
 	{
-
+	public:
+		IKeyManage(emKeyType nType = AutoCriSetion);//0, 自动解锁式cs, 1表示要手动解cs, 
+		~IKeyManage();
+		void Lock(bool bIsReadLock = false) const;
+		void UnLock(bool bIsReadLock = false) const;
+		const emKeyType nKeyType;
+	protected:
+		IKeyCore* pKeyCore;
 	};
 
 	class ZTools ILock
@@ -24,7 +43,21 @@ namespace ZoyeePro10
 	public:
 		ILock(IKeyManage& keyMgr);
 		~ILock();
+		void Lock(bool bIsReadLock = false);
+		void UnLock(bool bIsReadLock = false);
 	private:
 		const IKeyManage& m_keyMgr;
 	};
+	//-----------------------------lock-------------------------------------------
+
+	class ITask
+	{
+	public:
+		virtual void Run(void* lpParam) = 0;
+	};
+
+	
+
 }
+
+#endif
