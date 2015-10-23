@@ -80,7 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IKeyCore.h" />
-    <ClInclude Include="KeyCriSetion.h" />
+    <ClInclude Include="KeyCriSection.h" />
     <ClInclude Include="KeyReadWrite.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -96,7 +96,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="IKeyCore.cpp" />
-    <ClCompile Include="KeyCriSetion.cpp" />
+    <ClCompile Include="KeyCriSection.cpp" />
     <ClCompile Include="KeyReadWrite.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

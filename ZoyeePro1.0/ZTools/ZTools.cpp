@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "ZTools.h"
 #include "IKeyCore.h"
-#include "KeyCriSetion.h"
+#include "KeyCriSection.h"
 #include <assert.h>
 
 ZoyeePro10::IKeyManage::IKeyManage(emKeyType nType) :
@@ -15,7 +15,7 @@ ZoyeePro10::IKeyManage::IKeyManage(emKeyType nType) :
 	{
 	case AutoCriSetion:
 	case ManualCriSetion:
-		pKeyCore = new CKeyCriSetion;
+		pKeyCore = new CKeyCriSection;
 		break;
 	case RWLock:
 		break;

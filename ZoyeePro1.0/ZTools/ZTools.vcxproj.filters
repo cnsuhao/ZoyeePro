@@ -32,10 +32,10 @@
     <ClInclude Include="IKeyCore.h">
       <Filter>Lock</Filter>
     </ClInclude>
-    <ClInclude Include="KeyCriSetion.h">
+    <ClInclude Include="KeyReadWrite.h" />
+    <ClInclude Include="KeyCriSection.h">
       <Filter>Lock</Filter>
     </ClInclude>
-    <ClInclude Include="KeyReadWrite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZTools.cpp">
@@ -50,11 +50,11 @@
     <ClCompile Include="IKeyCore.cpp">
       <Filter>Lock</Filter>
     </ClCompile>
-    <ClCompile Include="KeyCriSetion.cpp">
-      <Filter>Lock</Filter>
-    </ClCompile>
     <ClCompile Include="KeyReadWrite.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyCriSection.cpp">
+      <Filter>Lock</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
