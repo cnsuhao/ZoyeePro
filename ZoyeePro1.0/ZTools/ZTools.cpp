@@ -3,20 +3,72 @@
 
 #include "stdafx.h"
 #include "ZTools.h"
+#include "IKeyCore.h"
+#include "KeyCriSetion.h"
+#include <assert.h>
 
-
-// 这是导出变量的一个示例
-ZTOOLS_API int nZTools=0;
-
-// 这是导出函数的一个示例。
-ZTOOLS_API int fnZTools(void)
+ZoyeePro10::IKeyManage::IKeyManage(emKeyType nType) :
+	pKeyCore(nullptr), 
+	nKeyType(nType)
 {
-	return 42;
+	switch(nType)
+	{
+	case AutoCriSetion:
+	case ManualCriSetion:
+		pKeyCore = new CKeyCriSetion;
+		break;
+	case RWLock:
+		break;
+	default:
+		break;
+	}
+	assert(pKeyCore);
 }
 
-// 这是已导出类的构造函数。
-// 有关类定义的信息，请参阅 ZTools.h
-CZTools::CZTools()
+ZoyeePro10::IKeyManage::~IKeyManage()
 {
-	return;
+	assert(pKeyCore);
+	delete pKeyCore;
+	pKeyCore = nullptr;
 }
+
+void ZoyeePro10::IKeyManage::Lock(bool bIsReadLock /*= false*/) const
+{
+	assert(pKeyCore);
+	pKeyCore->Lock(bIsReadLock);
+}
+
+
+void ZoyeePro10::IKeyManage::UnLock(bool bIsReadLock /*= false*/) const
+{
+	assert(pKeyCore);
+	pKeyCore->UnLock(bIsReadLock);
+}
+
+ZoyeePro10::ILock::ILock( IKeyManage& keyMgr ):
+	m_keyMgr(keyMgr)
+{
+	if (m_keyMgr.nKeyType == AutoCriSetion)
+	{
+		m_keyMgr.Lock();
+	}
+}
+
+ZoyeePro10::ILock::~ILock()
+{
+	if (m_keyMgr.nKeyType == AutoCriSetion)
+	{
+		m_keyMgr.UnLock();
+	}
+}
+
+void ZoyeePro10::ILock::Lock( bool bIsReadLock /*= false*/)
+{
+	m_keyMgr.Lock(bIsReadLock);
+}
+
+void ZoyeePro10::ILock::UnLock( bool bIsReadLock /*= false*/ )
+{
+	m_keyMgr.UnLock(bIsReadLock);
+}
+
