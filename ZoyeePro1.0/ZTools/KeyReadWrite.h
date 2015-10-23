@@ -17,6 +17,9 @@ namespace ZoyeePro10
 		bool TryWriteLock();
 		bool TryReadLock();
 
+	private:
+		void lockcs();
+		void unlockcs();
 		int m_nWriterCount;
 		int m_nReadCount;
 		void* pCriSection;
