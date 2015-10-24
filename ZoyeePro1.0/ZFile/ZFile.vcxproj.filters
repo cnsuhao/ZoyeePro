@@ -16,6 +16,18 @@
     <Filter Include="default">
       <UniqueIdentifier>{8fa31ddd-4685-44a9-9531-94be70d483fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3p">
+      <UniqueIdentifier>{169cffd1-57b9-495e-a840-3ea02b29404c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3p\tidyxml2">
+      <UniqueIdentifier>{3abd1416-5d0c-43e9-a215-b4f24463932b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3p\jsonCpp">
+      <UniqueIdentifier>{8e652c0c-4c16-4c08-93b8-ff9f6729ce13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3p\jsonCpp\src">
+      <UniqueIdentifier>{362aa962-e1d9-45cc-9c09-8803d6ff4a93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -30,6 +42,36 @@
     <ClInclude Include="targetver.h">
       <Filter>default</Filter>
     </ClInclude>
+    <ClInclude Include="tinyxml2\tinyxml2.h">
+      <Filter>3p\tidyxml2</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json.h">
+      <Filter>3p\jsonCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\reader.h">
+      <Filter>3p\jsonCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\value.h">
+      <Filter>3p\jsonCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\writer.h">
+      <Filter>3p\jsonCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json_batchallocator.h">
+      <Filter>3p\jsonCpp\src</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\forwards.h">
+      <Filter>3p\jsonCpp\src</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\features.h">
+      <Filter>3p\jsonCpp\src</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\config.h">
+      <Filter>3p\jsonCpp\src</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\autolink.h">
+      <Filter>3p\jsonCpp\src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZFile.cpp">
@@ -40,6 +82,18 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>default</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2\tinyxml2.cpp">
+      <Filter>3p\tidyxml2</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp\json_reader.cpp">
+      <Filter>3p\jsonCpp\src</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp\json_value.cpp">
+      <Filter>3p\jsonCpp\src</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp\json_writer.cpp">
+      <Filter>3p\jsonCpp\src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
