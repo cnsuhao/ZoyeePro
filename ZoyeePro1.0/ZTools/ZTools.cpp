@@ -5,6 +5,7 @@
 #include "ZTools.h"
 #include "IKeyCore.h"
 #include "KeyCriSection.h"
+#include "KeyReadWrite.h"
 #include <assert.h>
 
 ZoyeePro10::IKeyManage::IKeyManage(emKeyType nType) :
@@ -18,6 +19,7 @@ ZoyeePro10::IKeyManage::IKeyManage(emKeyType nType) :
 		pKeyCore = new CKeyCriSection;
 		break;
 	case RWLock:
+		pKeyCore = new CKeyReadWrite;
 		break;
 	default:
 		break;
@@ -71,4 +73,3 @@ void ZoyeePro10::ILock::UnLock( bool bIsReadLock /*= false*/ )
 {
 	m_keyMgr.UnLock(bIsReadLock);
 }
-

@@ -32,8 +32,10 @@
     <ClInclude Include="IKeyCore.h">
       <Filter>Lock</Filter>
     </ClInclude>
-    <ClInclude Include="KeyReadWrite.h" />
     <ClInclude Include="KeyCriSection.h">
+      <Filter>Lock</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyReadWrite.h">
       <Filter>Lock</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,10 +52,10 @@
     <ClCompile Include="IKeyCore.cpp">
       <Filter>Lock</Filter>
     </ClCompile>
-    <ClCompile Include="KeyReadWrite.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="KeyCriSection.cpp">
+      <Filter>Lock</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyReadWrite.cpp">
       <Filter>Lock</Filter>
     </ClCompile>
   </ItemGroup>
