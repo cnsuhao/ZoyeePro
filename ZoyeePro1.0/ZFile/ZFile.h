@@ -24,7 +24,60 @@
 
 namespace ZoyeePro10
 {
-	class IFileStream;
+#define JSON_FILE				0
+#define XML_FILE				1
+	class IFileBase
+	{
+	public:
+		char* ToString();
+		int ToInt();
+		bool ToBoolen();
+	protected:
+		char* m_pszValue;
+	};
+	
+	class IFileNode : public IFileBase
+	{
+	public:
+		//构造
+		IFileNode(char* pszKey, char* pszValue);
+		IFileNode(char* pszKey, int nValue);
+		IFileNode(char* pszKey, bool bValue);
+		IFileNode(char* pszKey, IFileNode* pNode);
+
+		//序列化, 反序列化
+		virtual char* FormatString() = 0;//序列化
+		virtual IFileNode* Parse(char* pszString) = 0;//反序列化
+
+		//取值, 填值
+		virtual IFileNode* GetValue(char* pszKey) = 0;
+		virtual void SetValue(char* pszKey, IFileNode* ptrNode) = 0;
+
+		//取节点数量
+		virtual int GetNodeSize() = 0;
+		virtual int GetNodeSize(IFileNode* ptrNode) = 0;
+
+		//遍历
+		virtual IFileNode* First();
+		virtual IFileNode* Next(IFileNode* pNode) = 0; 
+		virtual IFileNode* Next() = 0;
+		void* End();
+
+		//查找
+		virtual IFileNode* FindFirst(char* pszKey) = 0;
+		virtual IFileNode* FindNext(char* pszKey) = 0;
+
+	protected:
+		IFileNode* pNode;
+	};
+
+	typedef IFileNode IFile;
+	class ZFile CFileProtocol
+	{
+	public:
+		IFile* Create(int nType = JSON_FILE);
+		void Release(IFile* ptrFile);
+	};
 }
 
 #endif

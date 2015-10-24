@@ -73,3 +73,5 @@ void ZoyeePro10::ILock::UnLock( bool bIsReadLock /*= false*/ )
 {
 	m_keyMgr.UnLock(bIsReadLock);
 }
+
+

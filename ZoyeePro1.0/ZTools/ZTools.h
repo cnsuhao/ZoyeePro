@@ -57,7 +57,19 @@ namespace ZoyeePro10
 		virtual void Run(void* lpParam) = 0;
 	};
 
+	class ZTools CSimpleThreadPool
+	{
+	public:
+		CSimpleThreadPool(int nMaxThread = 10);
+		int AddTask(ITask* pTask);
+	protected:
+		int m_nMaxThread;
+		
+	};
+
 	//----------------------------thread pool------------------------------------
+	//----------------------------myList-------------------
+
 
 	//----------------------------auto free template (include this h is enough ^_^)---------------------------
 	template <class TObject>

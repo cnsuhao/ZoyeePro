@@ -1,0 +1,8 @@
+<persons>
+	<person name="Jack">Hello, I am Jack</person>
+	<person name="Rose">
+		<body>
+			<arm long=10></arm>
+		</body>
+	</person>
+</persons>
