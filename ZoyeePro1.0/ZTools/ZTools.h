@@ -50,14 +50,48 @@ namespace ZoyeePro10
 	};
 	//-----------------------------lock-------------------------------------------
 
+	//----------------------------thread pool------------------------------------
 	class ITask
 	{
 	public:
 		virtual void Run(void* lpParam) = 0;
 	};
 
-	
+	//----------------------------thread pool------------------------------------
 
+	//----------------------------auto free template (include this h is enough ^_^)---------------------------
+	template <class TObject>
+	class CAutoPtr
+	{
+	public:
+		CAutoPtr(TObject* ptr);
+		~CAutoPtr();
+		TObject* GetPtr();
+	private:
+		TObject* m_ptr;
+	};
+
+	template <class TObject> 
+	ZoyeePro10::CAutoPtr<TObject>::CAutoPtr( TObject* ptr )
+	{
+		m_ptr = ptr;
+	};
+
+	template <class TObject> 
+	ZoyeePro10::CAutoPtr<TObject>::~CAutoPtr()
+	{
+		delete m_ptr;
+	};
+
+	template <class TObject> 
+	TObject* ZoyeePro10::CAutoPtr<TObject>::GetPtr()
+	{
+		return m_ptr;
+	};
+	//----------------------------auto free template (include this h is enough ^_^)---------------------------
+
+
+	//class CAutoPtr
 }
 
 #endif
