@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <json/writer.h>
 #include <utility>
 #include <assert.h>

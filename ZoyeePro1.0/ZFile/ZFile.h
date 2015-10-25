@@ -22,61 +22,34 @@
 #define __ZFILE_H__
 #define ZFile ZFILE_API
 
+#include <fstream>
+using namespace std;
+
 namespace ZoyeePro10
 {
 #define JSON_FILE				0
 #define XML_FILE				1
-	class IFileBase
+	class IValue;
+	class IRoot;
+	class IFilePro
 	{
 	public:
-		char* ToString();
-		int ToInt();
-		bool ToBoolen();
-	protected:
-		char* m_pszValue;
-	};
-	
-	class IFileNode : public IFileBase
-	{
-	public:
-		//构造
-		IFileNode(char* pszKey, char* pszValue);
-		IFileNode(char* pszKey, int nValue);
-		IFileNode(char* pszKey, bool bValue);
-		IFileNode(char* pszKey, IFileNode* pNode);
-
-		//序列化, 反序列化
-		virtual char* FormatString() = 0;//序列化
-		virtual IFileNode* Parse(char* pszString) = 0;//反序列化
-
-		//取值, 填值
-		virtual IFileNode* GetValue(char* pszKey) = 0;
-		virtual void SetValue(char* pszKey, IFileNode* ptrNode) = 0;
-
-		//取节点数量
-		virtual int GetNodeSize() = 0;
-		virtual int GetNodeSize(IFileNode* ptrNode) = 0;
-
-		//遍历
-		virtual IFileNode* First();
-		virtual IFileNode* Next(IFileNode* pNode) = 0; 
-		virtual IFileNode* Next() = 0;
-		void* End();
-
-		//查找
-		virtual IFileNode* FindFirst(char* pszKey) = 0;
-		virtual IFileNode* FindNext(char* pszKey) = 0;
-
-	protected:
-		IFileNode* pNode;
+		//初始化与结束
+		virtual bool Parse(const char* pStrText) = 0;
+		virtual bool ParseFromFile(const char* pFileName) = 0;
+		virtual bool SaveToFile(const char* pFileName) = 0;
+		virtual const char* SaveToString() = 0;
 	};
 
-	typedef IFileNode IFile;
-	class ZFile CFileProtocol
+	class ZFile CFilePro
 	{
 	public:
-		IFile* Create(int nType = JSON_FILE);
-		void Release(IFile* ptrFile);
+		IFilePro* Create(int nProtocolType = JSON_FILE);
+		//IFilePro(const char* pFileText, int nProtocolType = JSON_FILE);//由于无法感知错误, 还是放弃使用
+
+
+	protected:
+		void* pCore;
 	};
 }
 
