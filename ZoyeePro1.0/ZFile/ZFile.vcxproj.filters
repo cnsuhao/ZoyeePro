@@ -22,11 +22,8 @@
     <Filter Include="3p\tidyxml2">
       <UniqueIdentifier>{3abd1416-5d0c-43e9-a215-b4f24463932b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3p\jsonCpp">
-      <UniqueIdentifier>{8e652c0c-4c16-4c08-93b8-ff9f6729ce13}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3p\jsonCpp\src">
-      <UniqueIdentifier>{362aa962-e1d9-45cc-9c09-8803d6ff4a93}</UniqueIdentifier>
+    <Filter Include="3p\Jsoncpp">
+      <UniqueIdentifier>{daec6ff4-cf0f-41c0-8e75-42c92113349d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,32 +42,11 @@
     <ClInclude Include="tinyxml2\tinyxml2.h">
       <Filter>3p\tidyxml2</Filter>
     </ClInclude>
-    <ClInclude Include="jsoncpp\json.h">
-      <Filter>3p\jsonCpp</Filter>
+    <ClInclude Include="JsonPro.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="jsoncpp\reader.h">
-      <Filter>3p\jsonCpp</Filter>
-    </ClInclude>
-    <ClInclude Include="jsoncpp\value.h">
-      <Filter>3p\jsonCpp</Filter>
-    </ClInclude>
-    <ClInclude Include="jsoncpp\writer.h">
-      <Filter>3p\jsonCpp</Filter>
-    </ClInclude>
-    <ClInclude Include="jsoncpp\json_batchallocator.h">
-      <Filter>3p\jsonCpp\src</Filter>
-    </ClInclude>
-    <ClInclude Include="jsoncpp\forwards.h">
-      <Filter>3p\jsonCpp\src</Filter>
-    </ClInclude>
-    <ClInclude Include="jsoncpp\features.h">
-      <Filter>3p\jsonCpp\src</Filter>
-    </ClInclude>
-    <ClInclude Include="jsoncpp\config.h">
-      <Filter>3p\jsonCpp\src</Filter>
-    </ClInclude>
-    <ClInclude Include="jsoncpp\autolink.h">
-      <Filter>3p\jsonCpp\src</Filter>
+    <ClInclude Include="XmlPro.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -87,13 +63,19 @@
       <Filter>3p\tidyxml2</Filter>
     </ClCompile>
     <ClCompile Include="jsoncpp\json_reader.cpp">
-      <Filter>3p\jsonCpp\src</Filter>
+      <Filter>3p\Jsoncpp</Filter>
     </ClCompile>
     <ClCompile Include="jsoncpp\json_value.cpp">
-      <Filter>3p\jsonCpp\src</Filter>
+      <Filter>3p\Jsoncpp</Filter>
     </ClCompile>
     <ClCompile Include="jsoncpp\json_writer.cpp">
-      <Filter>3p\jsonCpp\src</Filter>
+      <Filter>3p\Jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonPro.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XmlPro.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

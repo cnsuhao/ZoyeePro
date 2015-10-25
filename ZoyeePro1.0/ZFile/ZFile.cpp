@@ -10,35 +10,6 @@
 //
 #include "stdafx.h"
 #include "ZFile.h"
+#define DELETE_CHAR(obj) if(obj){delete obj; obj = nullptr;}
 
 using namespace ZoyeePro10;
-
-char* ZoyeePro10::IFileBase::ToString()
-{
-	return m_pszValue;
-}
-
-int ZoyeePro10::IFileBase::ToInt()
-{
-	return atoi(m_pszValue);
-}
-
-bool ZoyeePro10::IFileBase::ToBoolen()
-{
-	if ((m_pszValue[0] == 't' || m_pszValue[0] == 'T') && 
-		(m_pszValue[1] == 'r' || m_pszValue[1] == 'R') &&
-		(m_pszValue[2] == 'u' || m_pszValue[2] == 'U') &&
-		(m_pszValue[3] == 'e' || m_pszValue[3] == 'E'))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-IFileNode* ZoyeePro10::CFileProtocol::Create( int nType /*= JSON_FILE*/ )
-{
-	return nullptr;
-}
