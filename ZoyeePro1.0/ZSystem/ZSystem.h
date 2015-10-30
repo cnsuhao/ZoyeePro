@@ -10,13 +10,55 @@
 #define ZSYSTEM_API __declspec(dllimport)
 #endif
 
-// 此类是从 ZSystem.dll 导出的
-class ZSYSTEM_API CZSystem {
+#ifndef __ZSYSTEM_H__
+#define __ZSYSTEM_H__
+
+
+namespace ZoyeePro10
+{
+#define ZSystem ZSYSTEM_API
+
+#define INT_TYPE 0
+#define STR_TYPE 1
+
+class ZSystem CCpuInfo
+{
 public:
-	CZSystem(void);
-	// TODO: 在此添加您的方法。
+	CCpuInfo();
+	int nCoreCount;
+	//想到什么再补充
 };
 
-extern ZSYSTEM_API int nZSystem;
+class ZSystem CHDInfo
+{
+public:
+	CHDInfo();
+	int nFree;
+	int nMax;
+	char szName[64];
+};
 
-ZSYSTEM_API int fnZSystem(void);
+class ZSystem CHardwareInfo
+{
+public:
+	CHardwareInfo();
+	~CHardwareInfo();
+
+	CHDInfo* GetHDInfo(int& nCount);
+	CCpuInfo* GetCpuInfo(int& nCount);
+
+private:
+	CHDInfo* m_pHdInfo;
+	CCpuInfo* m_pCpuInfo;
+	int m_nCpuCount;
+	int m_nHDCount;
+};
+
+ZSystem bool IsOS_X64();
+ZSystem int GetValueFromReg(char* lpSubKey, char* pRes, int nType = INT_TYPE, char* pHKEY = "HKEY_CURRENT_USER");
+ZSystem int CmdOutputByPipe(char* cmd, char* res);//可以把控制台的打印输出到res上, 但会等待执行完毕函数才返回
+ZSystem CHardwareInfo GetHardwareInfo();
+
+}
+
+#endif
