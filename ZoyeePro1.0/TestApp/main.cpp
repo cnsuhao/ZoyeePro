@@ -75,19 +75,22 @@
 //	}
 //}
 
-#include <iostream>
+//#include <iostream>
+//#define 啥都没有 void
+//#define 安全入口 main()
+//#define 喊出来 std::cout 
+//#define 完毕 std::endl
+//
+//啥都没有 安全入口
+//{
+//	喊出来 << "你大爷" << 完毕;
+//};
 
-using namespace std;
 #include "../ZSystem/ZSystem.h"
 #pragma comment(lib, "../output/debug/zsystem.lib")
 
-GetSetFunc
-
 int main()
 {
-	ZoyeePro10::CHardwareInfo c;
-	c.nHDCount = 10;
-	ZoyeePro10::CHardwareInfo::CCpuInfo cpu;
-	cpu.nCoreCount = 19;
+	char sz[128];
+	ZoyeePro10::GetValueFromReg("software\\oracle\\virtualbox", sz, STR_TYPE, "HKEY_LOCAL_MACHINE");
 }
-
